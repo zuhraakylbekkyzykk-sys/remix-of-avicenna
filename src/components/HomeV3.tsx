@@ -171,6 +171,16 @@ const SPECIALTY_PILLS = [
   "Эндокринология",
 ];
 
+const SPECIALTY_ICONS: Record<string, typeof Brain> = {
+  "Неврология": Brain,
+  "Урология": Droplets,
+  "Маммология": Ribbon,
+  "Гинекология": Flower2,
+  "Кардиология": HeartPulse,
+  "Лор": Ear,
+  "Эндокринология": Activity,
+};
+
 const REVIEWS = [
   { text: "Быстро приняли в травмпункте ночью, всё объяснили и сделали снимок за 15 минут.", src: "2GIS" },
   { text: "Чекап прошли всей семьёй за два дня — результаты пришли в приложение.", src: "Google" },

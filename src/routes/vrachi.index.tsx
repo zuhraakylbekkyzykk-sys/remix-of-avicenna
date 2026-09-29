@@ -381,15 +381,17 @@ function DoctorsDirectory({ doctors, initialCategory }: { doctors: ClinicDoctor[
                   </p>
                 )}
               </div>
-              <Button
-                asChild
-                variant="outline"
-                className="border-about-teal text-about-ink hover:bg-brand-green hover:border-brand-green hover:text-white mt-auto w-full bg-transparent shadow-none"
-              >
-                <Link to="/vrachi/$slug" params={{ slug: doctor.slug }}>
-                  Подробнее
-                </Link>
-              </Button>
+              <div className="mt-auto pt-8">
+                <Button
+                  asChild
+                  variant="outline"
+                  className="border-about-teal text-about-ink hover:bg-brand-green hover:border-brand-green hover:text-white w-full bg-transparent shadow-none"
+                >
+                  <Link to="/vrachi/$slug" params={{ slug: doctor.slug }}>
+                    Подробнее
+                  </Link>
+                </Button>
+              </div>
             </article>
           ))}
         </div>

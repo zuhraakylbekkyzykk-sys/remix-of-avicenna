@@ -11,37 +11,52 @@ bun install
 bun run dev
 ```
 
-## Самостоятельный деплой на Vercel
+## Деплой на любой сервер
 
-Проект уже настроен для сборки под Vercel (`nitro: { preset: "vercel" }` в `vite.config.ts` и `vercel.json`).
+Сборка не привязана к конкретному хостингу: `vite build` запускает Nitro, который сам
+определяет платформу по переменным окружения CI (Vercel, Netlify, Cloudflare и др.).
+Если платформа не определяется (например, свой VPS), укажите пресет явно через
+переменную `NITRO_PRESET`:
 
-1. **Синхронизируйте код с GitHub** через встроенную интеграцию Lovable:
-   - В редакторе Lovable нажмите **+** → **GitHub** → **Connect project**.
-   - Выберите аккаунт/организацию и создайте/выберите репозиторий.
-   - Дождитесь синхронизации.
+```sh
+# Обычный Node-сервер / VPS — результат в .output/, запуск: node .output/server/index.mjs
+NITRO_PRESET=node_server bun run build
 
-2. **Импортируйте репозиторий в Vercel**:
-   - Dashboard Vercel → **Add New Project** → выберите репозиторий GitHub.
-   - Framework Preset оставьте на **Other** (контролируется `vercel.json`).
-   - Build Command: `vite build` (уже задано в `vercel.json`).
-   - **Output Directory оставьте пустым.** Nitro собирает в `.vercel/output`
-     (Build Output API v3), Vercel находит его сам. Если явно указать
-     `.vercel/output` как Output Directory, Vercel посчитает его статической
-     папкой и все страницы вернут 404.
+# Vercel
+NITRO_PRESET=vercel bun run build
 
-3. **Добавьте переменные окружения** в Vercel (Project Settings → Environment Variables):
-   - `VITE_SUPABASE_URL`
-   - `VITE_SUPABASE_PUBLISHABLE_KEY`
-   - `VITE_SUPABASE_PROJECT_ID`
-   - `SUPABASE_URL`
-   - `SUPABASE_PUBLISHABLE_KEY`
-   - `SUPABASE_PROJECT_ID`
-   - `LOVABLE_API_KEY` — берётся из секретов проекта в Lovable.
-   - `VITE_LOVABLE_CONNECTOR_GOOGLE_MAPS_BROWSER_KEY` (если используется карта)
-   - `VITE_LOVABLE_CONNECTOR_GOOGLE_MAPS_TRACKING_ID` (если используется карта)
+# Netlify
+NITRO_PRESET=netlify bun run build
 
-4. **Запустите деплой**. Vercel соберёт проект и создаст SSR-функции для всех маршрутов.
+# Cloudflare Workers
+NITRO_PRESET=cloudflare-module bun run build
+```
 
-## Почему раньше не отображалось на Vercel
+Сборка и запуск на чистом Node:
 
-По умолчанию Lovable собирает TanStack Start под Cloudflare Workers. Для Vercel нужен Nitro-пресет `vercel`, который теперь задан в `vite.config.ts`.
+```sh
+npm install
+NITRO_PRESET=node_server npm run build
+node .output/server/index.mjs   # по умолчанию порт 3000
+```
+
+### Переменные окружения
+
+Задайте их в панели хостинга или в `.env` на сервере:
+
+- `VITE_SUPABASE_URL`
+- `VITE_SUPABASE_PUBLISHABLE_KEY`
+- `VITE_SUPABASE_PROJECT_ID`
+- `SUPABASE_URL`
+- `SUPABASE_PUBLISHABLE_KEY`
+- `SUPABASE_PROJECT_ID`
+- `LOVABLE_API_KEY` — берётся из секретов проекта в Lovable (нужен для ИИ-функций).
+- `VITE_LOVABLE_CONNECTOR_GOOGLE_MAPS_BROWSER_KEY` и `VITE_LOVABLE_CONNECTOR_GOOGLE_MAPS_TRACKING_ID` — если используется карта филиалов.
+
+Всё, что начинается с `VITE_`, вшивается в код на этапе сборки, поэтому эти значения
+должны быть доступны именно при запуске `npm run build`, а не только при запуске сервера.
+
+### Примечание про сборку в Lovable
+
+Сборка внутри Lovable всегда настраивается на собственный хостинг Lovable и игнорирует
+`NITRO_PRESET` — это не влияет на самостоятельный деплой.

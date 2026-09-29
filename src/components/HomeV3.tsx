@@ -1,4 +1,4 @@
-import { ArrowRight, ClipboardCheck, Award, Waves, MapPin, Star, Stethoscope, TrendingUp } from "lucide-react";
+import { ArrowRight, ClipboardCheck, Award, Waves, MapPin, Star, Stethoscope, TrendingUp, Brain, Droplets, Ribbon, Flower2, HeartPulse, Ear, Activity } from "lucide-react";
 import { useRef, useState } from "react";
 
 import aboutHeroAsset from "@/assets/chat/about-hero.webp";
@@ -64,16 +64,24 @@ function SpecialtyMarquee() {
         >
           <div className={`${manual ? "" : "marquee-track-quarter"} flex w-max`}>
             {[0, 1, 2, 3].map((copy) => (
-              <div key={copy} className="flex shrink-0 gap-3 pr-3" aria-hidden={copy > 0}>
-                {SPECIALTY_PILLS.map((name) => (
-                  <Link
-                    key={`${copy}-${name}`}
-                    to="/napravleniya"
-                    className="bg-brand-green text-brand-white hover:bg-brand-green-dark flex shrink-0 items-center justify-center rounded-full px-8 py-3.5 text-base font-extrabold whitespace-nowrap transition-colors"
-                  >
-                    {name}
-                  </Link>
-                ))}
+              <div key={copy} className="flex shrink-0 gap-4 pr-4" aria-hidden={copy > 0}>
+                {SPECIALTY_PILLS.map((name) => {
+                  const Icon = SPECIALTY_ICONS[name] ?? Stethoscope;
+                  return (
+                    <Link
+                      key={`${copy}-${name}`}
+                      to="/napravleniya"
+                      className="bg-background border-border hover:border-brand-green/50 hover:shadow-[0_8px_24px_-12px_rgb(0_0_0/0.15)] flex w-[210px] shrink-0 flex-col items-start gap-4 rounded-2xl border p-5 text-left transition-all duration-200"
+                    >
+                      <span className="bg-brand-green/10 text-brand-green flex size-11 shrink-0 items-center justify-center rounded-full transition-transform duration-200 group-hover:scale-105">
+                        <Icon className="size-5" />
+                      </span>
+                      <span className="text-foreground text-base font-extrabold whitespace-nowrap">
+                        {name}
+                      </span>
+                    </Link>
+                  );
+                })}
               </div>
             ))}
           </div>

@@ -9,7 +9,7 @@ export function SiteFooter() {
     <footer id="contacts" className="border-border border-t">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-[1.2fr_1fr_1fr]">
         <div>
-          <div className="flex flex-wrap items-center justify-between gap-4">
+          <div className="flex flex-col items-start gap-5">
             <img
               src={logo}
               alt="Клинико-диагностический центр «Авиценна»"
@@ -22,7 +22,7 @@ export function SiteFooter() {
               href={BOOKING_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-accent text-accent-foreground inline-flex rounded-md px-6 py-3.5 text-base font-semibold transition-opacity hover:opacity-90"
+              className="bg-accent text-accent-foreground inline-flex w-full items-center justify-center rounded-xl px-8 py-4 text-base font-semibold shadow-sm transition-all hover:-translate-y-0.5 hover:opacity-90 sm:w-auto"
             >
               <Editable ekey="footer.cta" label="Кнопка в подвале" fallback="Записаться онлайн" />
             </a>

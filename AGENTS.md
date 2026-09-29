@@ -8,3 +8,7 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+## Деплой
+
+- Не задаём фиксированный Nitro-пресет в `vite.config.ts` и не держим `vercel.json`: сборка должна подходить любому хостингу, платформа выбирается переменной `NITRO_PRESET` (см. README). Почему: проект выгружают на разные серверы, а закреплённый пресет ломает сборку на чужом хостинге.

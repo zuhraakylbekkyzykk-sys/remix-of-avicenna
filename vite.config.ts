@@ -12,7 +12,6 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
-  // Pin the Nitro output to Vercel so the app builds the right serverless bundle
-  // when deployed from GitHub/Vercel instead of Lovable's default Cloudflare target.
-  nitro: { preset: "vercel" },
+  // No fixed deploy target here: Nitro detects the platform on its own, and any
+  // server can be chosen explicitly with NITRO_PRESET (see README).
 });

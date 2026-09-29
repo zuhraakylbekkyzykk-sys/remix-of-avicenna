@@ -60,7 +60,7 @@ function SpecialtyMarquee() {
         <div
           ref={scrollerRef}
           onScroll={handleLoop}
-          className="group marquee-mask no-scrollbar relative overflow-x-auto px-12 scroll-smooth"
+          className="group marquee-mask no-scrollbar relative overflow-x-auto px-12 py-3 scroll-smooth"
         >
           <div className={`${manual ? "" : "marquee-track-quarter"} flex w-max`}>
             {[0, 1, 2, 3].map((copy) => (
@@ -71,7 +71,7 @@ function SpecialtyMarquee() {
                     <Link
                       key={`${copy}-${name}`}
                       to="/napravleniya"
-                      className="group/card border-border bg-background hover:border-brand-green hover:bg-brand-green hover:shadow-[0_16px_34px_-16px_rgb(0_112_95/0.65)] focus-visible:ring-brand-green/70 flex w-[210px] shrink-0 cursor-pointer flex-col items-start gap-4 rounded-2xl border p-5 text-left transition-all duration-200 hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
+                      className="group/card border-border bg-background hover:border-brand-green hover:bg-brand-green hover:shadow-[0_10px_22px_-12px_rgb(0_112_95/0.7)] focus-visible:ring-brand-green/70 flex w-[210px] shrink-0 cursor-pointer flex-col items-start gap-4 rounded-2xl border p-5 text-left transition-all duration-200 hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
                     >
                       <span className="bg-brand-green/10 text-brand-green group-hover/card:bg-brand-white/25 group-hover/card:text-brand-white group-hover/card:scale-110 flex size-11 shrink-0 items-center justify-center rounded-full transition-all duration-200">
                         <Icon className="size-5" />
